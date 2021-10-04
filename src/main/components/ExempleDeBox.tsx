@@ -1,5 +1,6 @@
 import React from "react"
 import { connect } from "react-redux"
+import { getThemeValues } from "../theme/BasicTheme"
 import { getTheme } from "../theme/selectors/themeSelector"
 import { SupportedThemes } from "./ThemeSelect"
 
@@ -8,18 +9,9 @@ interface Props {
 }
 
 const ExempleDeBox = (props: Props) => {
-
-    const getColor = () => {
-        if (props.theme === SupportedThemes.LIGHT) {
-            return "#FF0000"
-        }
-        else {
-            return "#00FF00"
-        }
-    }
-
+    const themeValues = getThemeValues(props.theme);
     return (
-        <div style={{ width: 200, height: 200, backgroundColor: getColor() }}>
+        <div style={{ width: 200, height: 200, backgroundColor: themeValues.colors.primary }}>
             Patate
         </div>
     )

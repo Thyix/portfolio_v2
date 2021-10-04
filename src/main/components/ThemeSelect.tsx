@@ -3,6 +3,7 @@ import React, { useState } from "react"
 import { bindActionCreators } from "redux"
 import { connect } from 'react-redux'
 import { toggleTheme } from "../theme/actions/themeActions"
+import { getThemeValues } from "../theme/BasicTheme"
 import { getTheme } from "../theme/selectors/themeSelector"
 
 export enum SupportedThemes {
@@ -18,8 +19,7 @@ interface Props {
 }
 
 const ThemeSelect = (props: Props) => {
-    const [theme, setTheme] = useState<SupportedThemes>(SupportedThemes.LIGHT)
-    console.log(props.theme)
+    const [theme, setTheme] = useState<SupportedThemes>(SupportedThemes.LIGHT);
 
     const handleChange = (event: any) => {
         const newTheme = event.target.value;
@@ -27,6 +27,8 @@ const ThemeSelect = (props: Props) => {
         setTheme(newTheme);
         props.actions.toggleTheme(newTheme);
     }
+
+    const themeValues = getThemeValues(theme);
 
     return (
         <Box sx={{ minWidth: 120 }}>
@@ -43,6 +45,10 @@ const ThemeSelect = (props: Props) => {
                     <MenuItem value={SupportedThemes.DARK}>Dark</MenuItem>
                 </Select>
             </FormControl>
+
+            <button style={{backgroundColor: themeValues.colors.primary }}>
+                Exemple de theme qui switch
+            </button>
         </Box>
     )
 }
